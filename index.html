@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Is Tomas Bylander Awesome?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            background: url(bg.png) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        .hidden {
+            opacity: 0;
+        }
+
+        .console-container {
+            font-family: 'Press Start 2P';
+            font-size: 4em;
+            text-align: center;
+            height: 1em;
+            width: 100vw;
+            display: block;
+            position: absolute;
+            color: #ffffff80;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            user-select: none;
+        }
+
+        .console-underscore {
+            display: inline-block;
+            position: relative;
+            top: -0.14em;
+            left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='console-container'>
+        <span id='text'></span><div class='console-underscore' id='console'>&#95;</div>
+    </div>
+</body>
+
+<script>
+    consoleText(["Yes",
+        "Absolutely",
+        "Definitely",
+        "Positively",
+        "Certainly",
+        "Indeed",
+        "Affirmative",
+        "Undoubtedly",
+        "Sure",
+        "Totally",
+        "Yes",
+        "Yup",
+        "Indubitably",
+        "Resoundingly",
+        "Beyond doubt",
+        "Unquestionably",
+        "Most definitely",
+        "Without a doubt",
+        "Naturally",
+        "Without question",
+        "Of course",
+        "You bet",
+        "Without hesitation",
+        "Sure thing",
+        "No doubt",
+        "Beyond question",
+        "Inarguably"]);
+
+    function consoleText(words) {
+        var visible = true;
+        var con = document.getElementById('console');
+        var letterCount = 1;
+        var x = 1;
+        var waiting = false;
+        var target = document.getElementById('text')
+        window.setInterval(function () {
+            if (letterCount === 0 && waiting === false) {
+                waiting = true;
+                target.innerHTML = words[0].substring(0, letterCount)
+                window.setTimeout(function () {
+                    var usedWord = words.shift();
+                    words.push(usedWord);
+                    x = 1;
+                    letterCount += x;
+                    waiting = false;
+                }, 1000)
+            } else if (letterCount === words[0].length + 1 && waiting === false) {
+                waiting = true;
+                window.setTimeout(function () {
+                    x = -1;
+                    letterCount += x;
+                    waiting = false;
+                }, 3000)
+            } else if (waiting === false) {
+                target.innerHTML = words[0].substring(0, letterCount)
+                letterCount += x;
+            }
+        }, 120)
+        window.setInterval(function () {
+            if (visible === true) {
+                con.className = 'console-underscore hidden'
+                visible = false;
+
+            } else {
+                con.className = 'console-underscore'
+                visible = true;
+            }
+        }, 400)
+    }
+</script>
+
+</html>
